@@ -22,7 +22,6 @@ const main = async () => {
     let seeds = input[0].split(' ');
     seeds.shift();
     seeds = seeds.map((s) => Number(s));
-    seeds = seeds.sort((a, b) => a - b);
 
     let maps = [];
 
@@ -79,7 +78,7 @@ const main = async () => {
         }
     }
 
-    //console.log(maps[0])
+    //part 1
     let min = Infinity;
 
     for(let i = 0; i < seeds.length; i++){
@@ -99,6 +98,35 @@ const main = async () => {
         }
 
         min = Math.min(min, val);
+    }
+
+    console.log(min);
+
+
+    //part 2
+    min = Infinity;
+
+    for(let i = 0; i < seeds.length; i+=2){
+
+        for(let u = seeds[i]; u < seeds[i] + seeds[i+1]; u+=5){
+            let val = u;
+
+            for(let j = 0; j < maps.length; j++){
+                const map = maps[j];
+    
+                for(let k = 0; k < map.length; k+=3){
+                    const dest = map[k], source = map[k+1], range = map[k+2];
+    
+                    if(val >= source && val < source+range){
+                        val = (val - source) + dest;
+                        break;
+                    }
+                }
+            }
+
+            min = Math.min(min, val);
+        }
+       
     }
 
     console.log(min);
