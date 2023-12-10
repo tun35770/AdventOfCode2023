@@ -44,6 +44,29 @@ const main = async () => {
     }
 
     console.log(total);
+
+
+    //part 2
+
+    let time = "", distance = "";
+
+    for(let i = 0; i < times.length; i++){
+        time += times[i].toString();
+    }
+
+    for(let i = 0; i < dist.length; i++){
+        distance += dist[i].toString();
+    }
+
+    time = Number(time);
+    distance = Number(distance);
+    let count = 0;
+
+    for(let j = 0; j < time; j++){
+        if( (time-j) * j > distance) count++;
+    }
+
+    console.log(count);
 }
 
 main();
