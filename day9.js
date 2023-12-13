@@ -50,6 +50,38 @@ const main = async () => {
     }
 
     console.log(sum);
+
+
+    //part 2
+     sum = 0;
+    for(let i = 0; i < input.length; i++){
+        let nums = input[i].split(' ').map((n) => Number(n));
+        let arr = [nums[0]];
+
+        let flag = true;
+        while(flag){
+            let diff = nums[1] - nums[0];
+            let diffs = [diff];
+            //console.log(nums)
+            for(let j = 2; j < nums.length; j++){
+                diffs.push(nums[j] - nums[j-1]);
+                if(nums[j] - nums[j-1] !== diff) flag = false;
+            }
+
+            arr.push(diffs[0]);
+            nums = diffs;
+            flag = !flag;
+        }
+        
+        let val = arr[arr.length-1];
+        for(let j = arr.length-2; j >= 0; j--){
+            val = arr[j] - val;
+        }
+
+        sum += val;
+    }
+
+    console.log(sum);
 }
 
 main();
